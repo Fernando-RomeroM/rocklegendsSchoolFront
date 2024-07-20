@@ -1,0 +1,15 @@
+.cursosAll {
+  
+  display: flex;
+  list-style: none;
+}
+.curso {
+  width: 200px;
+  height: 200px;
+  border: 1px solid orange;
+  margin: 15px 0px 0px 15px;
+  background-color: cadetblue;
+}
+.allIn {
+  display:flex;
+}

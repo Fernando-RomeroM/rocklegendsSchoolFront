@@ -1,0 +1,2 @@
+- Vamos a dividir en dos repositorios el Back y el Front.
+- Aún no sé cómo vamos a hacer la base de datos.
