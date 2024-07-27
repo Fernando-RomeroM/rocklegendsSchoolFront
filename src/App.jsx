@@ -1,27 +1,24 @@
 import { useState } from 'react'
 import './App.css'
+import Header from './components/Header'
+import Portada from './components/Portada'
+import Guitarra from './components/Guitarra'
+import Bajo from './components/Bajo'
+import Bateria from './components/Bateria'
+import Voz from './components/Voz'
+import Combo from './components/Combo'
 
 function App() {
  
   return (
     <>
-    <div className="menuInicio"> Rock Legends School</div> 
-      <div className="allIn">
-      <div className="menuGlobal">
-          <li className="liUp">Este es el menú para nuestra página</li>
-          <li className="liMidle">Usuario</li>
-          <li className="liDown"></li>
-      </div>
-      <div>
-        <lu className="cursosAll">
-            <li className="curso"> hola hola </li>
-            <li className="curso"></li>
-            <li className="curso"></li>
-            <li className="curso"></li>
-        </lu>
-     </div>
-    </div>
-
+      <Header/>
+      <Portada/>
+      <Guitarra/>
+      <Bajo/>
+      <Bateria/>
+      <Voz/>
+      <Combo/>
     </>
   )
 }
