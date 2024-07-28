@@ -63,3 +63,49 @@ vamos por el minuto 1h
 Cuando entramos con nuestro usuario se nos ve un mensaje. "Estás a un paso de convertirte en Legenda"
 
 1:23: CORS
+
+
+mi estructura de carpetas:
+
+FINALBOSS
+/rocklegendsSchoolBack
+    /controllers
+        alumnosControllers.js
+        userControllers.js
+    /node_modules
+    /routes
+        alumnosRoutes.js
+        profesoresRoutes.js
+        userRoutes.js
+    .env
+    db.js
+    db.sql
+    index.js
+    package-lock.json
+    package.json
+/rocklegendsSchoolFront
+    /node_modules   
+    /public
+    /src
+        /assets
+        /components
+            AlumnosGuitarra.jsx
+            Bajo.jsx
+            Bateria.jsx
+            Combo.jsx
+            Guitarra.jsx
+            Header.jsx
+            Portada.jsx
+            Voz.jsx
+        App.css
+        App.jsx
+        index.css
+        main.jsx
+    .eslintrc.cjs
+    .gitignore
+    index.html
+    notes.md
+    package-lock.json
+    package.json
+    wite.config.js
+

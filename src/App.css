@@ -35,72 +35,7 @@
   margin-right: 15px;
 }
 
-/*Texto de informacion de las clases */
-.texto1 {
-  
-  
-}
-.texto11 {
-  list-style: none;
-  position: absolute;
-  padding-top: 5%;
-  /* background-color: #bd070741; */
-  width: 60%;
-  height: 60%;
-  
-}
-.texto12 {
-  color: beige;
-  font-size: 34px;
-  font-family: "Poppins", sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-.texto13 {
-  color:#00bfff;
-  font-size: 24px;
-  font-family: "Poppins", sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-.texto14 {
-  color: #dad7cd;
-  font-size: 16px;
-  font-family: "Poppins", sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-.texto15 {
-  color: #fe2d3b;
-  font-size: 16px;
-  font-family: "Poppins", sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.8);
-}
-.btndiv{
-  padding-top: 40px;
-  font-size: 16px;
-  font-family: "Poppins", sans-serif;
 
-}
-.btnwht {
-  background-color:bisque;
-  width: 300px;
-  height: 80px;
-  border-radius: 6px;
-  border: 2px solid black;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-.btnli {
-  margin-right: 15px;
-}
-.btnreal {
-  display: flex;
-  justify-content: flex-end;
-  background-color: black;
-  color: azure;
-  margin-right: 5px;
-  height: 25px;
-  align-items: center;
-}
 
 
 /* Menú estilo papel */

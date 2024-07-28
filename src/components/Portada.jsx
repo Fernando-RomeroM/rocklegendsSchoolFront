@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 const Portada = () => {
     return (
         <div>
@@ -6,7 +9,12 @@ const Portada = () => {
                     <li className="texto12">Estas a un paso</li>
                     <li className="texto13">de convertirte en Leyenda</li>
                     <li className="texto14"></li>
-                    <li></li>
+                    <li>
+                        <Link to="/Guitarra">
+                        <button className="btnreal">
+                        Nuestros alumnos
+                        </button>
+                        </Link></li>
                 </ul>
             </div>
             <img className="Wall1" src="../public/img/Wall1.jpg" alt="Fondo de clase" />  {/*// fondo de clase */}
