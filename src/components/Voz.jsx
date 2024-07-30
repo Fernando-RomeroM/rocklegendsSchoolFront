@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 const Voz = () => {
     return (
         <div>
@@ -11,9 +14,12 @@ const Voz = () => {
                     <li className="btndiv">
                         <div className="btnwht">
                             <li className="btnli">Voz de los dioses</li>
-                            <li><button className="btnreal">                            
+                            <li>
+                            <Link to="/AlumnosVoz">
+                            <button className="btnreal">
                                 Nuestros alumnos
                             </button>
+                            </Link>
                             </li>                                                    
                         </div>
                     </li>

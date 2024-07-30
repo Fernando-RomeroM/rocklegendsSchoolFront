@@ -70,12 +70,11 @@ mi estructura de carpetas:
 FINALBOSS
 /rocklegendsSchoolBack
     /controllers
-        alumnosControllers.js
+        alumnoControllers.js
         userControllers.js
     /node_modules
     /routes
-        alumnosRoutes.js
-        profesoresRoutes.js
+        alumnoRoutes.js
         userRoutes.js
     .env
     db.js
@@ -97,6 +96,8 @@ FINALBOSS
             Header.jsx
             Portada.jsx
             Voz.jsx
+        /context
+            AlumnosContext.jsx
         App.css
         App.jsx
         index.css
@@ -109,3 +110,41 @@ FINALBOSS
     package.json
     wite.config.js
 
+// nuestra API
+
+GET alumnos => /api/alumnos
+[
+    {
+        id,
+        nombre,
+        apellidos,
+        instrumento,
+        foto,
+        email,
+        telefono
+    }
+]
+
+POST/api/login
+
+body:
+{
+    username,
+    password
+}
+
+Responde:
+
+{
+    Token
+    userid
+}
+
+GET user => /api/users/[id]/
+
+Response:
+{
+    id,
+    email,
+    name
+}

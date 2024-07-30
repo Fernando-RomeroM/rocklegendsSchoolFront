@@ -3,15 +3,15 @@ import axios from 'axios';
 import { useAlumnosContext } from '../context/AlumnosContext';
 import { Link } from 'react-router-dom';
 
-const AlumnosGuitarra = () => {
+const AlumnosVoz = () => {
   const { alumnos, setAlumnos } = useAlumnosContext();
 
   useEffect(() => {
     const fetchAlumnos = async () => {
       try {
         const response = await axios.get('/api/alumnos');
-        const alumnosGuitarra = response.data.filter(alumno => alumno.instrumento === 'guitarra');
-        setAlumnos(alumnosGuitarra);
+        const alumnosVoz = response.data.filter(alumno => alumno.instrumento === 'voz');
+        setAlumnos(alumnosVoz);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -22,7 +22,7 @@ const AlumnosGuitarra = () => {
 
   return (
     <div className="Wall2">
-      <h1 className="h1ficha">Lista de Alumnos de Guitarra</h1>
+      <h1 className="h1ficha">Lista de Alumnos de Canto y Voz</h1>
       <div className="divficha">
         <ul className="ulficha">
           {alumnos.map((alumno) => (
@@ -42,7 +42,7 @@ const AlumnosGuitarra = () => {
         </ul>
         
       </div>
-      <Link to="/Guitarra">
+      <Link to="/Voz">
       <button className="btnatras">Volver atrás</button>
       </Link>
       <div>
@@ -53,5 +53,5 @@ const AlumnosGuitarra = () => {
   );
 };
 
-export default AlumnosGuitarra;
+export default AlumnosVoz;
 

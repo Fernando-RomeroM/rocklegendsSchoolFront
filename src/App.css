@@ -86,3 +86,50 @@
   color: gold;
   font-size: 24px;
 }
+
+/* Menú desplegable */
+
+.ulstyle {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ulstyle > li {
+  display: inline-block;
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #3F0D12;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.ulstyle > li:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu > li {
+  padding: 8px 16px;
+}
+
+.dropdown-link {
+  text-decoration: none;
+  color: gold;
+}
+
+.dropdown-link:hover {
+  color: silver; /* Cambia esto al color que prefieras para el hover */
+}
+
+.lidrch {
+  /* Añade los estilos que prefieras para estos elementos */
+}
+
+/* Añade cualquier otro estilo que necesites */

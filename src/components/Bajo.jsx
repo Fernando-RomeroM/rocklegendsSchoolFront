@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 const Bajo = () => {
     return (
         <div>
@@ -11,9 +14,12 @@ const Bajo = () => {
                     <li className="btndiv">
                         <div className="btnwht">
                             <li className="btnli">Hacia el olimpo </li>
-                            <li><button className="btnreal">                            
-                                Nuestros alumnos
-                            </button>
+                            <li>
+                            <Link to="/alumnosBajo">
+                  <button className="btnreal">
+                    Nuestros alumnos
+                  </button>
+                </Link>
                             </li>                                                    
                         </div>
                     </li>

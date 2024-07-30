@@ -44,8 +44,8 @@
 }
 .btnwht {
   background-color:bisque;
-  width: 300px;
-  height: 80px;
+  width: 400px;
+  height: 140px;
   border-radius: 6px;
   border: 2px solid black;
   display: flex;
@@ -61,7 +61,8 @@
   background-color: black;
   color: azure;
   margin-right: 5px;
-  height: 25px;
+  height: 35px;
   align-items: center;
-  cursor:default;
+  cursor: pointer;
+  font-size: 24px;
 }

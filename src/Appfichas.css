@@ -1,0 +1,83 @@
+/* Aquí vamos a poner el CSS de las fichas */
+
+.h1ficha {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    margin-top: 0;
+    padding-top: 20px;
+} 
+
+.divficha {
+    display: flex;
+    
+}
+    
+.ulficha {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    font-family: "Poppins", sans-serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.lificha {
+    background-color: beige;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin: 5px 5px 5px 5px;
+    padding: 0px 25px 0px 25px;
+    width: 360px; /*medidas de la ficha */
+    height: 450px;
+}
+.fotoficha {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;    
+    width: 300px; /* o el tamaño que prefieras */
+    height: 250px;
+    height: auto; /* Mantener la proporción */
+    margin-top: 5px; /* si ponemos margen donde no debemos se va a descolocar */
+    margin-bottom: 15px;
+  }
+
+  .lificha p {
+    margin-top: 2px;  /* Espacio dentro del párrafo en la parte superior */
+    margin-bottom: 2px;  /* Espacio dentro del párrafo en la parte inferior */
+  }
+
+  .btnatras {
+    background-color: black;
+    color: bisque;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+  }
+  .btnnota {
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    background-color: gold;
+    color: brown;
+    border-radius: 4px;
+    font-family: "Poppins", sans-serif;
+  }
+  .Wall2 {
+    background-image: url('/public/img/fondopapel.jpg');
+    padding-bottom: 40px;
+  }
