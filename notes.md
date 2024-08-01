@@ -88,7 +88,10 @@ FINALBOSS
     /src
         /assets
         /components
+            AlumnosBajo.jsx
+            AlumnosBatería.jsx
             AlumnosGuitarra.jsx
+            AlumnosVoz.jsx
             Bajo.jsx
             Bateria.jsx
             Combo.jsx

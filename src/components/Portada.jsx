@@ -19,19 +19,3 @@ const Portada = () => {
 
 export default Portada;
 
-
-{/* 
-    //*menu antiguo
-    <div>
-                <ul className="menuGlobal">
-                    <li className="liUp">Este es el menú para nuestra página</li>
-                    <li className="liMidle">
-                        <h3>Usuario</h3>
-                        <p><input type="text"></input></p>
-                        <h3>Contraseña</h3>
-                        <p><input type="password"></input></p>
-                        <button>Enviar</button>
-                    </li>
-                    <li className="liDown"></li>
-                </ul>
-            </div> */}
