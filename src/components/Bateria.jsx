@@ -16,10 +16,10 @@ const Bateria = () => {
                             <li className="btnli">Yo soy Espartaco </li>
                             <li>
                             <Link to="/AlumnosBateria">
-                  <button className="btnreal">
-                    Nuestros alumnos
-                  </button>
-                </Link>
+                                <button className="btnreal">
+                                  Nuestros alumnos
+                                </button>
+                             </Link>
                             </li>                                                    
                         </div>
                     </li>

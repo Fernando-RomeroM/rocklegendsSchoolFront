@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,6 +8,15 @@ const Header = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loggedInUser, setLoggedInUser] = useState('');
+
+  useEffect(() => {
+    // Check if user is already logged in (from localStorage or similar)
+    const storedUser = localStorage.getItem('loggedInUser');
+    if (storedUser) {
+      setLoggedInUser(storedUser);
+    }
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -24,12 +33,22 @@ const Header = () => {
       const response = await axios.post('/api/user/login', { username, password });
       const { token } = response.data;
       localStorage.setItem('authToken', token); // Guarda el token en localStorage
-      console.log('Eres un verdarero Trve Metalero:', response.data);
+      localStorage.setItem('loggedInUser', username); // Guarda el nombre de usuario en localStorage
+      setLoggedInUser(username); // Actualiza el estado con el nombre de usuario
+      console.log('Eres un verdadero Trve Metalero:', response.data);
       setLoginVisible(false);
     } catch (err) {
       console.error('Login error:', err);
       setError('No se permiten posers.');
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('loggedInUser');
+    setLoggedInUser('');
+    setUsername('');
+    setPassword('');
   };
 
   return (
@@ -48,10 +67,19 @@ const Header = () => {
             </ul>
           )}
         </li>
+        <Link className="dropdown-link" to="/componets/QuienesSomos">
         <li className="lidrch">Quienes somos</li>
+        </Link>
         <li className="lidrch" onClick={toggleLogin}>
-          Usuario
-          {loginVisible && (
+          {loggedInUser ? (
+            <>
+              Bienvenido, {loggedInUser}
+              <button className="logout-button" onClick={handleLogout}>Cerrar sesión</button>
+            </>
+          ) : (
+            'Usuario'
+          )}
+          {loginVisible && !loggedInUser && (
             <div className="login-dropdown" onClick={(e) => e.stopPropagation()}>
               <form onSubmit={handleLogin}>
                 <div>
