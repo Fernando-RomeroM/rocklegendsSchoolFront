@@ -67,7 +67,7 @@ const Header = () => {
             </ul>
           )}
         </li>
-        <Link className="dropdown-link" to="/componets/QuienesSomos">
+        <Link className="dropdown-link" to="/QuienesSomos">
         <li className="lidrch">Quienes somos</li>
         </Link>
         <li className="lidrch" onClick={toggleLogin}>

@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAlumnosContext } from '../context/AlumnosContext';
 import { Link } from 'react-router-dom';
 
 const AlumnosGuitarra = () => {
   const { alumnos, setAlumnos } = useAlumnosContext();
+  const [loggedInUser, setLoggedInUser] = useState('');
+  const [selectedAlumnoId, setSelectedAlumnoId] = useState(null);
+  const [calificaciones, setCalificaciones] = useState({});
 
   useEffect(() => {
     const fetchAlumnos = async () => {
@@ -18,7 +21,57 @@ const AlumnosGuitarra = () => {
     };
 
     fetchAlumnos();
+
+    const storedUser = localStorage.getItem('loggedInUser');
+    if (storedUser) {
+      setLoggedInUser(storedUser);
+    }
   }, [setAlumnos]);
+
+  const fetchCalificaciones = async (alumnoId) => {
+    try {
+      const response = await axios.get(`/api/calificaciones/${alumnoId}`);
+      return response.data.estado;
+    } catch (error) {
+      console.error('Error fetching calificaciones:', error);
+      return 'Sin calificación';
+    }
+  };
+
+  const handleCalificacion = async (alumno) => {
+    setSelectedAlumnoId(alumno.id);
+    const estadoCalificacion = await fetchCalificaciones(alumno.id);
+    setCalificaciones(prevState => ({
+      ...prevState,
+      [alumno.id]: estadoCalificacion
+    }));
+  };
+
+  const handleSaveCalificacion = async (alumnoId) => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const headers = {
+        Authorization: `Bearer ${token}`
+      };
+
+      await axios.post('/api/calificaciones/add', {
+        alumno_id: alumnoId,
+        user_id: loggedInUser.id,
+        estado: calificaciones[alumnoId]
+      }, { headers });
+
+      setSelectedAlumnoId(null);
+    } catch (error) {
+      console.error('Error saving calificacion:', error);
+    }
+  };
+
+  const handleChangeCalificacion = (alumnoId, value) => {
+    setCalificaciones(prevState => ({
+      ...prevState,
+      [alumnoId]: value
+    }));
+  };
 
   return (
     <div className="Wall2">
@@ -36,22 +89,36 @@ const AlumnosGuitarra = () => {
               <p>{alumno.nombre} {alumno.apellidos}</p>
               <p>Email: {alumno.email}</p>
               <p>Teléfono: {alumno.telefono}</p>
-              <button className="btnnota">Calificaciones</button>
+              <p>
+                {selectedAlumnoId === alumno.id ? (
+                  <div>
+                    <select 
+                      value={calificaciones[alumno.id] || ''} 
+                      onChange={(e) => handleChangeCalificacion(alumno.id, e.target.value)}
+                    >
+                      <option value="">Selecciona una opción</option>
+                      <option value="Aprobado">Aprobado</option>
+                      <option value="Suspendido">Suspendido</option>
+                    </select>
+                    <button className="btnsino" onClick={() => handleSaveCalificacion(alumno.id)}>Guardar</button>
+                    <button className="btnsino" onClick={() => setSelectedAlumnoId(null)}>Cancelar</button>
+                  </div>
+                ) : (
+                  calificaciones[alumno.id] || 'Sin calificación'
+                )}
+              </p>
+              {loggedInUser && (
+                <button className="btnnota" onClick={() => handleCalificacion(alumno)}>Calificaciones</button>
+              )}
             </li>
           ))}
         </ul>
-        
       </div>
       <Link to="/Guitarra">
-      <button className="btnatras">Volver atrás</button>
+        <button className="btnatras">Volver atrás</button>
       </Link>
-      <div>
-        
-      </div>
     </div>
-    
   );
 };
 
 export default AlumnosGuitarra;
-

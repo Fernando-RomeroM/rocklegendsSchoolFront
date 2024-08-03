@@ -10,6 +10,7 @@ import Bajo from './components/Bajo';
 import Bateria from './components/Bateria';
 import Voz from './components/Voz';
 import Combo from './components/Combo';
+import QuienesSomos from './components/QuienesSomos';
 // Aquí van las páginas de los alumnos
 import AlumnosGuitarra from './components/AlumnosGuitarra';
 import AlumnosBajo from './components/AlumnosBajo';
@@ -28,6 +29,7 @@ function App() {
         <Route path="/bateria" element={<Bateria />} />
         <Route path="/voz" element={<Voz />} />
         <Route path="/combo" element={<Combo />} />
+        <Route path="/QuienesSomos" element={<QuienesSomos />} />
         <Route path="/alumnosGuitarra" element={<AlumnosGuitarra />} />
         <Route path="/alumnosBajo" element={<AlumnosBajo />} />
         <Route path="/alumnosBateria" element={<AlumnosBateria />} />

@@ -66,3 +66,17 @@
   cursor: pointer;
   font-size: 24px;
 }
+
+/* Quienes Somos */
+.divQS {
+  position:absolute;
+  display: flex;
+  justify-content: center;
+  left: 30%;
+  right: 30%;
+  height: 60%;
+  color: gold;
+  font-family: "Poppins", sans-serif;
+  background-color: rgba(245, 245, 220, 0.22);
+
+}
