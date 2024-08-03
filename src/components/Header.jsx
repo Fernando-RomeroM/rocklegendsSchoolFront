@@ -8,13 +8,17 @@ const Header = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loggedInUser, setLoggedInUser] = useState('');
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
-    // Check if user is already logged in (from localStorage or similar)
     const storedUser = localStorage.getItem('loggedInUser');
-    if (storedUser) {
-      setLoggedInUser(storedUser);
+    try {
+      if (storedUser) {
+        setLoggedInUser(JSON.parse(storedUser)); // Asegúrate de que storedUser sea un objeto
+      }
+    } catch (e) {
+      console.error('Error parsing stored user:', e);
+      localStorage.removeItem('loggedInUser'); // Limpia el valor corrupto en localStorage
     }
   }, []);
 
@@ -30,23 +34,29 @@ const Header = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/user/login', { username, password });
-      const { token } = response.data;
+      console.log('Intentando iniciar sesión con:', { username, password });
+      const response = await axios.post('/api/users/login', { username, password });
+      const { token, userId } = response.data;
       localStorage.setItem('authToken', token); // Guarda el token en localStorage
-      localStorage.setItem('loggedInUser', username); // Guarda el nombre de usuario en localStorage
-      setLoggedInUser(username); // Actualiza el estado con el nombre de usuario
+      localStorage.setItem('loggedInUser', JSON.stringify({ id: userId, username })); // Guarda el nombre de usuario en JSON en localStorage
+      setLoggedInUser({ id: userId, username }); // Actualiza el estado con el nombre de usuario
       console.log('Eres un verdadero Trve Metalero:', response.data);
       setLoginVisible(false);
+      setError(''); // Limpiar el error al iniciar sesión correctamente
     } catch (err) {
       console.error('Login error:', err);
-      setError('No se permiten posers.');
+      if (err.response) {
+        setError(err.response.data.error || 'No se permiten posers.');
+      } else {
+        setError('Error desconocido.');
+      }
     }
   };
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('loggedInUser');
-    setLoggedInUser('');
+    setLoggedInUser(null);
     setUsername('');
     setPassword('');
   };
@@ -73,7 +83,7 @@ const Header = () => {
         <li className="lidrch" onClick={toggleLogin}>
           {loggedInUser ? (
             <>
-              Bienvenido, {loggedInUser}
+              Bienvenido, {loggedInUser.username}
               <button className="logout-button" onClick={handleLogout}>Cerrar sesión</button>
             </>
           ) : (

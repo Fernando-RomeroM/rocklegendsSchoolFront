@@ -1,28 +1,90 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAlumnosContext } from '../context/AlumnosContext';
 import { Link } from 'react-router-dom';
 
 const AlumnosVoz = () => {
   const { alumnos, setAlumnos } = useAlumnosContext();
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [selectedAlumno, setSelectedAlumno] = useState(null);
+  const [calificacion, setCalificacion] = useState('');
 
   useEffect(() => {
     const fetchAlumnos = async () => {
       try {
         const response = await axios.get('/api/alumnos');
         const alumnosVoz = response.data.filter(alumno => alumno.instrumento === 'voz');
-        setAlumnos(alumnosVoz);
+        
+        // Fetch calificaciones for each alumno
+        const alumnosWithCalificaciones = await Promise.all(alumnosVoz.map(async (alumno) => {
+          const calificacionResponse = await axios.get(`/api/calificaciones/${alumno.id}`);
+          const calificacion = calificacionResponse.data ? calificacionResponse.data.estado : 'Sin calificación';
+          return { ...alumno, estado: calificacion };
+        }));
+
+        setAlumnos(alumnosWithCalificaciones);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchAlumnos();
+
+    const storedUser = localStorage.getItem('loggedInUser');
+    if (storedUser) {
+      setLoggedInUser(JSON.parse(storedUser)); // Asegúrate de que storedUser sea un objeto
+    }
   }, [setAlumnos]);
+
+  const fetchCalificaciones = async (alumnoId) => {
+    try {
+      const response = await axios.get(`/api/calificaciones/${alumnoId}`);
+      return response.data?.estado || 'Sin calificación';
+    } catch (error) {
+      console.error('Error fetching calificaciones:', error);
+      return 'Sin calificación';
+    }
+  };
+
+  const handleCalificacion = async (alumno) => {
+    setSelectedAlumno(alumno);
+    const estadoCalificacion = await fetchCalificaciones(alumno.id);
+    setCalificacion(estadoCalificacion);
+  };
+
+  const handleSaveCalificacion = async () => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const headers = {
+        Authorization: `Bearer ${token}`
+      };
+
+      const calificacionData = {
+        alumno_id: selectedAlumno.id,
+        user_id: loggedInUser.id, // Asegúrate de que loggedInUser tenga el id del usuario
+        estado: calificacion
+      };
+      
+      console.log('Datos a enviar:', calificacionData);
+
+      await axios.post('/api/calificaciones', calificacionData, { headers });
+
+      // Update the state in the context
+      const updatedAlumnos = alumnos.map((alumno) => 
+        alumno.id === selectedAlumno.id ? { ...alumno, estado: calificacion } : alumno
+      );
+      setAlumnos(updatedAlumnos);
+
+      setSelectedAlumno(null);
+      setCalificacion('');
+    } catch (error) {
+      console.error('Error saving calificacion:', error);
+    }
+  };
 
   return (
     <div className="Wall2">
-      <h1 className="h1ficha">Lista de Alumnos de Canto y Voz</h1>
+      <h1 className="h1ficha">Lista de Alumnos de Voz</h1>
       <div className="divficha">
         <ul className="ulficha">
           {alumnos.map((alumno) => (
@@ -32,26 +94,41 @@ const AlumnosVoz = () => {
                 alt={`Foto de ${alumno.nombre} ${alumno.apellidos}`} 
                 width="50" 
               />
-              <p>Instrumento: {alumno.instrumento}</p>
-              <p>{alumno.nombre} {alumno.apellidos}</p>
-              <p>Email: {alumno.email}</p>
-              <p>Teléfono: {alumno.telefono}</p>
-              <button className="btnnota">Calificaciones</button>
+              <div>Instrumento: {alumno.instrumento}</div>
+              <div>{alumno.nombre} {alumno.apellidos}</div>
+              <div>Email: {alumno.email}</div>
+              <div>Teléfono: {alumno.telefono}</div>
+              <div>
+                {selectedAlumno && selectedAlumno.id === alumno.id ? (
+                  <div>
+                    <select 
+                      value={calificacion} 
+                      onChange={(e) => setCalificacion(e.target.value)}
+                    >
+                      <option value="">Selecciona una opción</option>
+                      <option value="Aprobado">Aprobado</option>
+                      <option value="Suspendido">Suspendido</option>
+                    </select>
+                    <button className="btnsino" onClick={handleSaveCalificacion}>Guardar</button>
+                    <button className="btnsino" onClick={() => setSelectedAlumno(null)}>Cancelar</button>
+                  </div>
+                ) : (
+                  alumno.estado || 'Sin calificación'
+                )}
+              </div>
+              {loggedInUser && (
+                <button className="btnnota" onClick={() => handleCalificacion(alumno)}>Calificaciones</button>
+              )}
             </li>
           ))}
         </ul>
-        
       </div>
       <Link to="/Voz">
-      <button className="btnatras">Volver atrás</button>
+        <button className="btnatras">Volver atrás</button>
       </Link>
-      <div>
-        
-      </div>
+      <div></div>
     </div>
-    
   );
 };
 
 export default AlumnosVoz;
-
