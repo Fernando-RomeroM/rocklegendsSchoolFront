@@ -14,7 +14,7 @@ const Header = () => {
     const storedUser = localStorage.getItem('loggedInUser');
     try {
       if (storedUser) {
-        setLoggedInUser(JSON.parse(storedUser)); // Asegúrate de que storedUser sea un objeto
+        setLoggedInUser(JSON.parse(storedUser)); 
       }
     } catch (e) {
       console.error('Error parsing stored user:', e);

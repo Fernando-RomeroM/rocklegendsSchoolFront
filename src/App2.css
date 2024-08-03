@@ -70,13 +70,32 @@
 /* Quienes Somos */
 .divQS {
   position:absolute;
-  display: flex;
+  display:flex;
   justify-content: center;
-  left: 30%;
-  right: 30%;
+  left: 20%;
+  right: 2%0%;
   height: 60%;
+  width: 900px;
+  margin-top: 20px;
+  background-color: rgba(27, 27, 27, 0.428);
+  
+}
+.divQS1 {
+  font-size: 34px;
   color: gold;
   font-family: "Poppins", sans-serif;
-  background-color: rgba(245, 245, 220, 0.22);
-
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
+}
+.divQS2 {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-family: "Poppins", sans-serif;
+  list-style: none;
+  font-size: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.adas {
+  width: 500px;
+  height: 450px;
 }

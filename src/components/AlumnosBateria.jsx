@@ -65,11 +65,8 @@ const AlumnosBateria = () => {
         estado: calificacion
       };
       
-      console.log('Datos a enviar:', calificacionData);
-
       await axios.post('/api/calificaciones', calificacionData, { headers });
 
-      // Update the state in the context
       const updatedAlumnos = alumnos.map((alumno) => 
         alumno.id === selectedAlumno.id ? { ...alumno, estado: calificacion } : alumno
       );

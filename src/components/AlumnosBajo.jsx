@@ -32,7 +32,7 @@ const AlumnosBajo = () => {
 
     const storedUser = localStorage.getItem('loggedInUser');
     if (storedUser) {
-      setLoggedInUser(JSON.parse(storedUser)); // Asegúrate de que storedUser sea un objeto
+      setLoggedInUser(JSON.parse(storedUser)); 
     }
   }, [setAlumnos]);
 
@@ -61,15 +61,13 @@ const AlumnosBajo = () => {
 
       const calificacionData = {
         alumno_id: selectedAlumno.id,
-        user_id: loggedInUser.id, // Asegúrate de que loggedInUser tenga el id del usuario
+        user_id: loggedInUser.id, 
         estado: calificacion
       };
-      
-      console.log('Datos a enviar:', calificacionData);
 
       await axios.post('/api/calificaciones', calificacionData, { headers });
 
-      // Update the state in the context
+      
       const updatedAlumnos = alumnos.map((alumno) => 
         alumno.id === selectedAlumno.id ? { ...alumno, estado: calificacion } : alumno
       );
